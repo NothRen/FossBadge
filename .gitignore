@@ -77,3 +77,6 @@ logs/
 
 # Celery
 celerybeat-schedule*
+
+# Opendcode
+.opencode
