@@ -863,7 +863,7 @@ class HomeViewSet(viewsets.ViewSet):
             # User can endorse if they have at least one structure
             can_endorse = Structure.objects.filter(
                 Q(admins=request.user) | Q(editors=request.user)
-            ).exists()
+            ).exclude(pk__in=badge.valid_structures)
 
         # PKs des structures avec marker (pour la carte MapLibre)
         # PKs of structures with a marker (for the MapLibre map)
@@ -1210,15 +1210,14 @@ class BadgeViewSet(viewsets.ViewSet):
         # Structures ou l'user est admin, qui n'endossent PAS encore ce badge
         # / Structures where user is admin, that do NOT already endorse this badge
         valid_structures = badge.valid_structures
-        user_admin_structures = Structure.objects.filter(admins=request.user)
-        user_admin_not_endorsing = user_admin_structures.difference(valid_structures)
+        user_structures = Structure.objects.filter(Q(admins=request.user)|Q(editors=request.user))
+        user_structure_not_endorsing = user_structures.difference(valid_structures)
 
         # Si toutes les structures admin endossent deja, erreur
         # / If all admin structures already endorse, error
-        if user_admin_not_endorsing.count() == 0:
-            return render(request, "errors/popup_errors.html", context={
-                "error": 'Toutes vos structures ont déjà endossé ce badge'
-            })
+        if user_structure_not_endorsing.count() == 0:
+            messages.error(request, "Toutes vos structures ont déjà endossé ce badge")
+            return reload(request)
 
         if request.method == "GET":
             # Pre-remplissage optionnel de la structure (utilise par la page lieu)
@@ -1230,12 +1229,12 @@ class BadgeViewSet(viewsets.ViewSet):
 
             # Si une seule structure, la pre-selectionner
             # / If only one structure, pre-select it
-            if user_admin_not_endorsing.count() == 1 and 'structure' not in defaults:
-                defaults['structure'] = str(user_admin_not_endorsing.first().pk)
+            if user_structure_not_endorsing.count() == 1 and 'structure' not in defaults:
+                defaults['structure'] = str(user_structure_not_endorsing.first().pk)
 
             return render(request, 'core/badge/partial/badge_endorsement.html', context={
                 "badge_pk": pk,
-                "structures": user_admin_not_endorsing,
+                "structures": user_structure_not_endorsing,
                 "defaults": defaults,
             })
 
@@ -1246,7 +1245,7 @@ class BadgeViewSet(viewsets.ViewSet):
                 "errors": validator.errors,
                 "defaults": validator.data,
                 "badge_pk": validator.data['badge'],
-                "structures": user_admin_not_endorsing,
+                "structures": user_structure_not_endorsing,
             })
 
         # Get all objects
