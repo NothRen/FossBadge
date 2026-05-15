@@ -6,19 +6,17 @@ alias rsp="uv run python3 manage.py runserver 0.0.0.0:8000"
 alias sp="uv run python3 manage.py shell_plus"
 alias guni="uv run gunicorn fedowallet_django.wsgi --log-level=debug --log-file /fedow/www/gunicorn.logs -w 3 -b 0.0.0.0:8000"
 alias mm="uv run python3 migrate"
-#alias pshell="eval $(uv env activate)"
+alias dshell="uv run manage.py shell"
 
 load_sql() {
-export PGPASSWORD=$POSTGRES_PASSWORD
-export PGUSER=$POSTGRES_USER
-export PGHOST=$POSTGRES_HOST
+    export PGPASSWORD=$POSTGRES_PASSWORD
+    export PGUSER=$POSTGRES_USER
+    export PGHOST=$POSTGRES_HOST
 
-psql --dbname $POSTGRES_DB -f $1
+    psql --dbname $POSTGRES_DB -f $1
 
-echo "SQL file loaded : $1"
+    echo "SQL file loaded : $1"
 }
 
 alias venv="source .venv/bin/activate"
 alias popdb="uv run manage.py populate_db --img"
-alias dshell="uv run manage.py shell"
-

@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     "badge.localhost",
     "91.134.241.241",
     "openbadge.coop",
+    "openbadge.localhost"
 ]
 CSRF_TRUSTED_ORIGINS = ["https://badge.codecommun.coop", "https://openbadge.coop"]
 

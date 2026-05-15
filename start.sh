@@ -6,11 +6,11 @@ export PATH="/home/fossbadge/.local/bin:$PATH"
 uv sync
 echo "UV install ok"
 
-uv run python manage.py migrate
-# Install if no asset created :
-#poetry run python3 manage.py install
-# New static for nginx ?
-#poetry run python3 manage.py collectstatic --noinput
+# Install UV
+uv run manage.py migrate
+
+# Collect static
+uv run manage.py collectstatic --noinput
 
 
 if [[ "$GUNICORN" == "1" ]]; then
@@ -20,6 +20,7 @@ if [[ "$GUNICORN" == "1" ]]; then
 else
     echo "→ Gunicorn désactivé, on sleep…"
 	  echo "To start the server : rsp"
+    echo "After starting rsp you can go to : http://$DOMAIN"
     sleep infinity
 fi
 #echo "Run GUNICORN"
