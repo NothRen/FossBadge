@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "pictures",
     "mapview",
     "popup",
+    "django_cotton",
 
     "django_cleanup.apps.CleanupConfig",  # Toujours en dernier
 ]
