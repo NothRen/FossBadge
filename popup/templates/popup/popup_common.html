@@ -201,12 +201,24 @@
 </style>
 
 <script>
+
+    const POPUP_STATE = {
+        UNLOADED : "unloaded",
+        LOADED : "loaded",
+        OPEN : "open"
+    };
+
+    window.django_popup = {
+        "popups":[],
+    }
+
     function openPopup(name, width){
         if (width!=="None"){
             document.querySelector('#customPopup-content-'+name).style.width = width
         }
         let popup = document.querySelector("#customPopup-"+name)
         popup.classList.add("showed")
+        //window.django_popup[""]
     }
 
     function closePopup(name){
@@ -215,6 +227,6 @@
     }
 
     function scrollToTopContent(name){
-        document.querySelector('#customPopup-content').scrollTo({top: 0, behavior: 'smooth'})
+        document.querySelector('#customPopup-content-'+name).scrollTo({top: 0, behavior: 'smooth'})
     }
 </script>

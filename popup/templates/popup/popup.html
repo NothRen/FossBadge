@@ -41,4 +41,10 @@ And finally you can open/close the popup using an htmx button for example :
             }
         })
     {% endif %}
+
+
+    window.django_popup.popups.push({
+        "name" : "{{ name }}",
+        "state" : POPUP_STATE.UNLOADED
+    });
 </script>
