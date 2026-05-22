@@ -9,7 +9,7 @@
     {% if request.user.is_authenticated %}
 
         <button type="button"
-                class="home-forge-btn m-2"
+                class="btn-badge m-2"
                 hx-get="{% url 'core:create_badge' %}"
                 hx-target="{% popup_content_id %}"
                 hx-swap="innerHTML"
@@ -21,7 +21,7 @@
         </button>
 
         <button type="button"
-                class="home-structure-btn m-2"
+                class="btn-structure m-2"
                 hx-get="{% url 'core:create_association' %}"
                 hx-target="{% popup_content_id %}"
                 hx-swap="innerHTML"
@@ -33,7 +33,7 @@
         </button>
 
         {# Utilisateur connecté : lien vers son passeport / Logged in user: link to their passport #}
-        <a href="{% url 'core:home-passeport' person_pk=request.user.pk %}" data-testid="navbar-passeport-link" class="home-invite-btn m-2">
+        <a href="{% url 'core:home-passeport' person_pk=request.user.pk %}" data-testid="navbar-passeport-link" class="btn-user m-2">
             <i class="bi bi-person-badge" aria-hidden="true">&#x1F4D6;</i>
             {% translate "Mon passeport" %}
         </a>
@@ -41,7 +41,7 @@
         {# Utilisateur non connecté : bouton ouvrant le panneau de connexion / Not logged in: button opening login panel #}
         <button
                 type="button"
-                class="home-invite-btn"
+                class="btn-user"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#loginPanel"
                 aria-controls="loginPanel"
