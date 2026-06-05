@@ -1912,7 +1912,7 @@ class UserViewSet(viewsets.ViewSet):
 
             login(request, user)
 
-            messages.success(request, f"Connexion réussi !")
+            messages.success(request, f"Connexion réussie !")
 
             return redirect('core:home-list')
         except SignatureExpired:
@@ -1927,7 +1927,7 @@ class UserViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['get'])
     def logout(self, request):
         logout(request)
-        messages.success(request, f"Déconnexion réussi")
+        messages.success(request, f"Déconnexion réussie")
         return redirect('core:home-list')
 
 class CourseViewSet(viewsets.ViewSet):
