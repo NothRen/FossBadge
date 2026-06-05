@@ -73,7 +73,7 @@
                         type="button"
                         class="btn-user"
                         hx-get="{% url 'core:edit-profile' pk=person.pk %}"
-                        hx-on:htmx:after-request="{% popup_open %}"
+                        hx-on:htmx:after-request="{% popup_open width="80%" %}"
                         hx-target="{% popup_content_id %}"
                         hx-swap="innerHTML"
                         data-testid="passeport-edit-profile-btn">
@@ -385,19 +385,15 @@
     </section>
     {% endif %}
 
-    {# ── Bouton Éditer mon profil (si c'est son propre passeport) ── #}
-    {# ── Edit profile button (if viewing own passport) ── #}
-    {% if is_self %}
-
-
-    {# ── Lien discret "Désactiver mon compte" ── #}
-    {# ── Discreet "Deactivate my account" link ── #}
-    <div class="mt-4 mb-2">
-        <button class="passeport-deactivate-link" onclick="{% popup_open %}">
-            {% translate "Désactiver mon compte" %}
-        </button>
-    </div>
-    {% endif %}
+{#    {% if is_self %}#}
+        {# ── Lien discret "Désactiver mon compte" ── #}
+        {# ── Discreet "Deactivate my account" link ── #}
+{#        <div class="mt-4 mb-2">#}
+{#            <button class="passeport-deactivate-link" onclick="{% popup_open %}">#}
+{#                {% translate "Désactiver mon compte" %}#}
+{#            </button>#}
+{#        </div>#}
+{#    {% endif %}#}
 
 </div>
 

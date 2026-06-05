@@ -115,7 +115,7 @@
                         hx-get="{% url 'core:create_badge' %}?structure={{ structure.pk }}"
                         hx-target="{% popup_content_id %}"
                         hx-swap="innerHTML"
-                        hx-on:htmx:after-request="{% popup_open %}"
+                        hx-on:htmx:after-request="{% popup_open width="80%" %}"
                         data-testid="btn-forge-badge">
                     <span aria-hidden="true">&#9874;</span>
                     {% translate "Forger un badge" %}
@@ -288,7 +288,7 @@
                 <button type="button"
                         class="btn-user"
                         hx-get="{% url 'core:structure-invite' structure.pk %}"
-                        hx-on:htmx:after-request="{% popup_open %}"
+                        hx-on:htmx:after-request="{% popup_open width="40%" %}"
                         hx-target="{% popup_content_id %}"
                         hx-swap="innerHTML"
                         data-testid="btn-forge-badge">

@@ -1050,6 +1050,7 @@ class BadgeViewSet(viewsets.ViewSet):
         Supprime un badge existant. Seul un admin de la structure emettrice peut supprimer.
         / Delete an existing badge. Only admin of the issuing structure can delete.
         """
+        return raise404(request)
         badge = get_object_or_404(Badge, pk=pk)
 
         # Seul un admin de la structure emettrice peut supprimer un badge
@@ -1603,6 +1604,7 @@ class StructureViewSet(viewsets.ViewSet):
         """
         Delete an existing structure.
         """
+        return raise404(request)
         structure = get_object_or_404(Structure, pk=pk)
         if not structure.is_admin(request.user):
             return raise403(request)
@@ -1950,6 +1952,7 @@ class CourseViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
 
+        return raise404(request)
         course = Course.objects.get(pk=pk)
         can_edit = request.user.can_edit_course(course)
 
@@ -1961,6 +1964,7 @@ class CourseViewSet(viewsets.ViewSet):
 
     def list(self,request):
 
+        return raise404(request)
         template = "core/courses/list.html"
 
         if request.htmx:
@@ -2011,6 +2015,7 @@ class CourseViewSet(viewsets.ViewSet):
         """
         Create a new course
         """
+        return raise404(request)
 
         if not request.htmx:
             return raise403(request)
@@ -2149,6 +2154,3 @@ class CourseViewSet(viewsets.ViewSet):
         course_parent.children.add(course_child)
 
         return HttpResponse()
-
-
-
