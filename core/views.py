@@ -794,10 +794,14 @@ class HomeViewSet(viewsets.ViewSet):
         5. Calcule les permissions (is_badge_editor, can_endorse)
         6. Rend la page complète core/badge_page/index.html
         """
-        badge = get_object_or_404(
-            Badge.objects.select_related('issuing_structure', 'issuing_structure__marker'),
-            uuid=badge_pk
-        )
+        try:
+            badge = get_object_or_404(
+                Badge.objects.select_related('issuing_structure', 'issuing_structure__marker'),
+                uuid=badge_pk
+            )
+        except Exception as e:
+            messages.error(request,"Ce badge n'existe pas")
+            return redirect(reverse('core:home-list'))
 
         # Structures qui endossent ce badge (sans la structure émettrice)
         # Structures that endorse this badge (excluding issuer)
