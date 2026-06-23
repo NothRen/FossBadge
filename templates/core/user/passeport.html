@@ -196,7 +196,8 @@
         </script>
     {% endif %}
 
-
+    {% if structures|length > 0 %}
+    	
     {# Section structures de la personne  #}
     <section class="mt-2">
         <details>
@@ -247,6 +248,7 @@
 
         </details>
     </section>
+    {% endif %}
 
     {# ── Section Parcours (timeline chronologique) ── #}
     {# ── Journey section (chronological timeline) ── #}

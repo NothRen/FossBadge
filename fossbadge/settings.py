@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
     "openbadge.coop",
     "openbadge.localhost"
 ]
-CSRF_TRUSTED_ORIGINS = ["https://badge.codecommun.coop", "https://openbadge.coop","https://openbadge.localhost"]
+CSRF_TRUSTED_ORIGINS = ["https://badge.codecommun.coop", "https://openbadge.coop","http://openbadge.localhost"]
 
 # Application definition
 
